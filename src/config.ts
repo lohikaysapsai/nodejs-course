@@ -1,17 +1,19 @@
+import { defaultTCPPort, apiKey } from './constants';
+
 const ParamNames = {
   help: '--help',
   port: '--port',
-  helloResponseMsg: '--helloresponsemsg'
+  apiKey: '--apikey'
 };
 
 interface IConfigValues {
   port: number
-  helloResponseMsg: string
+  apiKey: string
 }
 
 const ConfigValues: IConfigValues = {
-  port: 3000,
-  helloResponseMsg: 'Hello world [default]'
+  port: defaultTCPPort,
+  apiKey: apiKey
 };
 
 //-----------------------------------------------------------------------------
@@ -24,11 +26,11 @@ export const getConnectionPort = (): number => {
   return ConfigValues.port;
 }
 
-export const setHelloResponseMsg = (msg: string): void => {
-  ConfigValues.helloResponseMsg = msg;
+export const setApiKey = (value: string): void => {
+  ConfigValues.apiKey = value;
 }
-export const getHelloResponseMsg = (): string => {
-  return ConfigValues.helloResponseMsg;
+export const getApiKey = (): string => {
+  return ConfigValues.apiKey;
 }
 
 //-----------------------------------------------------------------------------
@@ -45,8 +47,8 @@ export const getHelloResponseMsg = (): string => {
       setConnectionPort(Number.parseInt(paramValue));
       break;
     }
-    case ParamNames.helloResponseMsg: {
-      setHelloResponseMsg(paramValue)
+    case ParamNames.apiKey: {
+      setApiKey(paramValue);
       break;
     }
     default: return;
@@ -62,7 +64,7 @@ export const getHelloResponseMsg = (): string => {
     case ParamNames.help: {
       console.log(
         '\t--port <port number>\n',
-        '\t--helloresponsemsg <message>\n'
+        '\t--apikey <string api key value>\n',
       );
       break;
     }

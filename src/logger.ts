@@ -1,5 +1,6 @@
 import winston from 'winston';
 
+
 const logger = winston.createLogger({
   format: winston.format.combine(
     winston.format.timestamp({
@@ -13,18 +14,35 @@ const logger = winston.createLogger({
   ],
 });
 
-export const logInfo = (msg: string): void => {
+enum MsgTypes {
+  INFO = 'INFO',
+  WARN = 'WARN',
+  DEBUG = 'DEBUG',
+  ERROR = 'ERROR'
+};
+
+const showInConsoleProc = (msg: string, type: MsgTypes = MsgTypes.INFO, showInConsole: boolean = false): void => {
+  if (showInConsole) {
+    console.log(`[${MsgTypes[type]}] : ${msg}`);
+  }
+};
+
+export const logInfo = (msg: string, showInConsole: boolean = false): void => {
   logger.info(msg);
+  showInConsoleProc(msg, MsgTypes.INFO, showInConsole);
 }
 
-export const logDebug = (msg: string): void => {
+export const logDebug = (msg: string, showInConsole: boolean = false): void => {
   logger.debug(msg);
+  showInConsoleProc(msg, MsgTypes.DEBUG, showInConsole);
 }
 
-export const logWarn = (msg: string): void => {
+export const logWarn = (msg: string, showInConsole: boolean = false): void => {
   logger.warn(msg);
+  showInConsoleProc(msg, MsgTypes.WARN, showInConsole);
 }
 
-export const logError = (msg: string): void => {
+export const logError = (msg: string, showInConsole: boolean = false): void => {
   logger.error(msg);
+  showInConsoleProc(msg, MsgTypes.ERROR, showInConsole);
 }
