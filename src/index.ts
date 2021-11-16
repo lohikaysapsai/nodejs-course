@@ -26,7 +26,6 @@ function requestLogger(request: any, response: any, next: any) {
 function errorHandler(error: any, request: any, response: any, next: any) {
   console.error(`Error: ${error.message}`);
   response.status(500).send({ error: STATUS_CODES[500] });
-  next();
 }
 
 app.use(express.json());

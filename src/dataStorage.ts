@@ -1,5 +1,5 @@
 export interface IMovie {
-  imdbID?: string
+  imdbID: string
   name?: string
   comment?: string
   personalScore?: number
@@ -18,6 +18,12 @@ export interface IMovie {
   imdbVotes?: string
   DVD?: string
 };
+
+export interface IMovieFetch {
+  name: string
+  comment: string
+  personalScore: number
+}
 
 export interface IShortResponse {
   result: boolean
